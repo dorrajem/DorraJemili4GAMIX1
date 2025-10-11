@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,4 +19,6 @@ public class Etudiant {
     private String cin;
     private String ecole;
     private Date dateNaissance;
+    @OneToMany(mappedBy = "etudiant")
+    private List<Reservation> reservations;
 }

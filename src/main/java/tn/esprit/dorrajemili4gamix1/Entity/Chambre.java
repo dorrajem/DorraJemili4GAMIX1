@@ -1,6 +1,9 @@
 package tn.esprit.dorrajemili4gamix1.Entity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -13,4 +16,10 @@ public class Chambre {
     private Long numeroChambre;
     @Enumerated(EnumType.STRING)
     private TypeChambre typeC;
+    @ManyToOne
+    @JoinColumn(name = "bloc_id")
+    private Bloc bloc;
+
+    @OneToMany(mappedBy = "chambre")
+    private List<Reservation> reservations;
 }

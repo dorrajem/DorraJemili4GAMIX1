@@ -1,6 +1,9 @@
 package tn.esprit.dorrajemili4gamix1.Entity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -12,4 +15,9 @@ public class Bloc {
     private Long idBloc;
     private String nomBloc;
     private Long capaciteBloc;
+    @ManyToOne
+    @JoinColumn(name = "foyer_id")
+    private Foyer foyer;
+    @OneToMany(mappedBy = "bloc")
+    private List<Chambre> chambres;
 }

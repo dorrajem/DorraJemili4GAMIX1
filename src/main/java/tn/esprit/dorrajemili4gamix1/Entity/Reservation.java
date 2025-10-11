@@ -16,4 +16,10 @@ public class Reservation {
     private String numeroReservation;
     private Date anneeUniversitaire;
     private boolean estValide;
+    @ManyToOne
+    @JoinColumn(name = "chambre_id")
+    private Chambre chambre;
+    @ManyToOne
+    @JoinColumn(name = "etudiant_id")
+    private Etudiant etudiant;
 }
