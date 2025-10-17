@@ -1,25 +1,24 @@
 package tn.esprit.dorrajemili4gamix1.Entity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReservation;
-    private String numeroReservation;
-    private Date anneeUniversitaire;
-    private boolean estValide;
-    @ManyToOne
-    @JoinColumn(name = "chambre_id")
-    private Chambre chambre;
-    @ManyToOne
-    @JoinColumn(name = "etudiant_id")
-    private Etudiant etudiant;
+     Long idReservation;
+     String numeroReservation;
+     Date anneeUniversitaire;
+     boolean estValide;
+
+    @ManyToMany(mappedBy="reservations")
+     Set<Etudiant> etudiant;
 }

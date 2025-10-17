@@ -1,23 +1,26 @@
 package tn.esprit.dorrajemili4gamix1.Entity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+
 public class Foyer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFoyer;
     private String nomFoyer;
     private Long capaciteFoyer;
+
     @OneToOne
-    @JoinColumn(name = "universite_id")
     private Universite universite;
+
     @OneToMany(mappedBy = "foyer")
-    private List<Bloc> blocs;
+    private Set<Bloc> blocs;
 }
