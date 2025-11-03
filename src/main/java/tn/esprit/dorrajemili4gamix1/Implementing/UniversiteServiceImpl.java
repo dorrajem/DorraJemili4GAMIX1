@@ -1,10 +1,10 @@
 package tn.esprit.dorrajemili4gamix1.Implementing;
 
 import org.springframework.stereotype.Service;
-import tn.esprit.oumaymabrineg4gamix.entities.Universite;
-import tn.esprit.oumaymabrineg4gamix.repositories.BlocRepository;
-import tn.esprit.oumaymabrineg4gamix.repositories.UniversiteRepository;
-import tn.esprit.oumaymabrineg4gamix.services.interfaces.IUniversiteService;
+import tn.esprit.dorrajemili4gamix1.Entity.Universite;
+import tn.esprit.dorrajemili4gamix1.Repository.BlocRepository;
+import tn.esprit.dorrajemili4gamix1.Repository.UniversiteRepository;
+import tn.esprit.dorrajemili4gamix1.Services.IUniversiteService;
 
 import java.util.List;
 
