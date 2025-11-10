@@ -5,10 +5,13 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.dorrajemili4gamix1.Entity.Etudiant;
 import tn.esprit.dorrajemili4gamix1.Services.IEtudiantService;
 
-@AllArgsConstructor
 @RestController
 
 public class EtudiantController {
+    public EtudiantController(IEtudiantService etudiantService) {
+        this.etudiantService = etudiantService;
+    }
+
     private final IEtudiantService etudiantService;
 
     @PostMapping("/addEtudiant")

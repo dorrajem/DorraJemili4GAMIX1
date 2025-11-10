@@ -6,12 +6,15 @@ import tn.esprit.dorrajemili4gamix1.Entity.Universite;
 import tn.esprit.dorrajemili4gamix1.Services.IUniversiteService;
 
 @RestController
-@AllArgsConstructor
 
 public class UniversiteController {
+    public UniversiteController(IUniversiteService universiteService) {
+        this.universiteService = universiteService;
+    }
+
     private final IUniversiteService universiteService;
 
-    @PostMapping("/addUniverisite")
+    @PostMapping("/addUniversite")
     public Universite addUniversite(@RequestBody Universite universite) {
         return universiteService.ajouUniversite(universite);
     }

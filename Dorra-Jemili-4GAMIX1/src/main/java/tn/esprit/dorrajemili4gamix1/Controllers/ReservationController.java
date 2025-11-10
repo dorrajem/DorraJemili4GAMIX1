@@ -6,10 +6,13 @@ import tn.esprit.dorrajemili4gamix1.Entity.Etudiant;
 import tn.esprit.dorrajemili4gamix1.Entity.Reservation;
 import tn.esprit.dorrajemili4gamix1.Services.IReservationService;
 
-@AllArgsConstructor
 @RestController
 
 public class ReservationController {
+    public ReservationController(IReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
+
     private final IReservationService reservationService;
 
     @PostMapping("/addReservation")

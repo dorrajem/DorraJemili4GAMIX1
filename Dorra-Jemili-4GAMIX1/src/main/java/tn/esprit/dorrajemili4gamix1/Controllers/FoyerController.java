@@ -6,9 +6,12 @@ import tn.esprit.dorrajemili4gamix1.Entity.Foyer;
 import tn.esprit.dorrajemili4gamix1.Services.IFoyerService;
 
 @RestController
-@AllArgsConstructor
 
 public class FoyerController {
+    public FoyerController(IFoyerService foyerService) {
+        this.foyerService = foyerService;
+    }
+
     private final IFoyerService foyerService;
 
     @PostMapping("/addFoyer")

@@ -6,9 +6,12 @@ import tn.esprit.dorrajemili4gamix1.Entity.Bloc;
 import tn.esprit.dorrajemili4gamix1.Services.IBlocService;
 
 @RestController
-@AllArgsConstructor
 
 public class blocController {
+    public blocController(IBlocService blocService) {
+        BlocService = blocService;
+    }
+
     private final IBlocService BlocService;
 
     @PostMapping("/addBloc" )

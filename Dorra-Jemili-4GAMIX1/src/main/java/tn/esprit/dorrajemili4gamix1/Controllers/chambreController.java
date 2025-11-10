@@ -5,10 +5,13 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.dorrajemili4gamix1.Entity.Chambre;
 import tn.esprit.dorrajemili4gamix1.Services.IChambreService;
 
-@AllArgsConstructor
 @RestController
 
 public class chambreController {
+    public chambreController(IChambreService chambreService) {
+        this.chambreService = chambreService;
+    }
+
     private final IChambreService chambreService;
 
     @PostMapping("/addChambre")
