@@ -1,11 +1,14 @@
 package org.example.tp.Implementing;
 
 import org.example.tp.Entities.Abonnement;
+import org.example.tp.Entities.Skieur;
 import org.example.tp.Repositories.AbonnementRepository;
+import org.example.tp.Repositories.SkieurRepository;
 import org.example.tp.Services.IAbonnementService;
 import org.example.tp.Enum.TypeAbonnement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,9 +20,11 @@ import java.util.Set;
 public class AbonnementServiceImpl implements IAbonnementService {
 
     private static final Logger log = LoggerFactory.getLogger(AbonnementServiceImpl.class);
+    private final SkieurRepository skieurRepository;
 
-    public AbonnementServiceImpl(AbonnementRepository AbonnementRepository) {
+    public AbonnementServiceImpl(AbonnementRepository AbonnementRepository, SkieurRepository skieurRepository) {
         this.AbonnementRepository = AbonnementRepository;
+        this.skieurRepository = skieurRepository;
     }
 
     private final AbonnementRepository AbonnementRepository;
@@ -54,5 +59,31 @@ public class AbonnementServiceImpl implements IAbonnementService {
     @Override
     public List<Abonnement> retrieveSubscriptionsByDates(LocalDate startDate, LocalDate endDate) {
         return AbonnementRepository.findByDateDebutBetween(startDate, endDate);
+    }
+
+
+    @Scheduled(cron= "0 0 0 * * *")
+    public void retrieveSubscriptions()
+    {
+        LocalDate today = LocalDate.now();
+        LocalDate sevenDaysLater = today.plusDays(7);
+
+        List<Abonnement> abonnements = AbonnementRepository.findByDateFinBetween(today, sevenDaysLater);
+        for(Abonnement abonnement : abonnements)
+        {
+            Skieur skieur= skieurRepository.findByAbonnement(abonnement);
+            System.out.println(skieur.getNomS());
+        }
+    }
+
+    @Scheduled(cron = "0 0 10 1 * ?") 
+    public void showMonthlyRecurringRevenue() {
+        List<Abonnement> abonnementsActifs = AbonnementRepository.findByDateFinAfter(LocalDate.now());
+
+        double mrr = abonnementsActifs.stream()
+                .mapToDouble(Abonnement::getPrixAbon)
+                .sum();
+
+        System.out.println("Monthly Recurring Revenue (MRR) : " + mrr + " €");
     }
 }
