@@ -76,12 +76,23 @@ public class AbonnementServiceImpl implements IAbonnementService {
         }
     }
 
-    @Scheduled(cron = "0 0 10 1 * ?") 
+    @Scheduled(cron = "0 0 10 1 * ?")
     public void showMonthlyRecurringRevenue() {
         List<Abonnement> abonnementsActifs = AbonnementRepository.findByDateFinAfter(LocalDate.now());
 
         double mrr = abonnementsActifs.stream()
-                .mapToDouble(Abonnement::getPrixAbon)
+                .mapToDouble(ab -> {
+                    switch (ab.getTypeAbon()) {
+                        case MENSUEL:
+                            return ab.getPrixAbon();
+                        case SEMESTRIEL:
+                            return ab.getPrixAbon() / 6.0;
+                        case ANNUEL:
+                            return ab.getPrixAbon() / 12.0;
+                        default:
+                            return 0;
+                    }
+                })
                 .sum();
 
         System.out.println("Monthly Recurring Revenue (MRR) : " + mrr + " €");
