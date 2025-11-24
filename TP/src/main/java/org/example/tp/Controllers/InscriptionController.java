@@ -34,5 +34,27 @@ public class InscriptionController
     public java.util.List<Inscription> getAllInscriptions() {
         return InscriptionService.retrieveAllInscriptions();
     }
+    @PostMapping("/inscriptions/skieur/{numSkieur}")
+    public Inscription addRegistrationAndAssignToSkieur(
+            @RequestBody Inscription inscription,
+            @PathVariable Long numSkieur) {
+        return InscriptionService.addRegistrationAndAssignToSkier(inscription, numSkieur);
+    }
+
+    // Affecter une inscription à un cours
+    @PutMapping("/inscriptions/{numRegistration}/cours/{numCourse}")
+    public Inscription assignRegistrationToCourse(
+            @PathVariable Long numRegistration,
+            @PathVariable Long numCourse) {
+        return InscriptionService.assignRegistrationToCourse(numRegistration, numCourse);
+    }
+
+    @PostMapping("/inscriptions/skieur/{numSkieur}/cours/{numCours}")
+    public Inscription addRegistrationAndAssignToSkierAndCourse(
+            @RequestBody Inscription inscription,
+            @PathVariable Long numSkieur,
+            @PathVariable Long numCours) {
+        return InscriptionService.addRegistrationAndAssignToSkierAndCourse(inscription, numSkieur, numCours);
+    }
 
 }

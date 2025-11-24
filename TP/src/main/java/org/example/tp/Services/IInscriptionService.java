@@ -8,6 +8,8 @@ public interface IInscriptionService {
     Inscription addInscription(Inscription inscription);
     void removeInscription (Long numInscription);
     Inscription retrieveInscription (Long numInscription);
-
+    Inscription addRegistrationAndAssignToSkier(Inscription inscription, Long numSkieur);
+    Inscription assignRegistrationToCourse(Long numInscription, Long numCourse);
+    Inscription addRegistrationAndAssignToSkierAndCourse(Inscription inscription, Long numSkieur, Long numCours);
 
 }

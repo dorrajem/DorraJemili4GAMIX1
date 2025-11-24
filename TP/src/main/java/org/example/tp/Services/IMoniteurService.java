@@ -8,5 +8,6 @@ public interface IMoniteurService {
     Moniteur addMoniteur(Moniteur moniteur);
     Moniteur updateMoniteur (Moniteur moniteur);
     Moniteur retrieveMoniteur (Long numMoniteur);
-
+    void removeMoniteur (Long numMoniteur);
+    Moniteur addInstructorAndAssignToCourse(Moniteur moniteur, Long numCourse);
 }

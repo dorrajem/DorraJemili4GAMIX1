@@ -34,5 +34,15 @@ public class MoniteurController
     public java.util.List<Moniteur> getAllMoniteurs() {
         return MoniteurService.retrieveAllMoniteurs();
     }
+    @PutMapping("/deleteMoniteur" )
+    public void deleteMoniteur(@RequestBody Long numMoniteur) {
+        MoniteurService.removeMoniteur(numMoniteur);
+    }
+    @PostMapping("/moniteurs/cours/{numCourse}")
+    public Moniteur addInstructorAndAssignToCourse(
+            @RequestBody Moniteur moniteur,
+            @PathVariable Long numCourse) {
+        return MoniteurService.addInstructorAndAssignToCourse(moniteur, numCourse);
+    }
 
 }

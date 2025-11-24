@@ -17,12 +17,12 @@ public class Skieur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long numSkieur;
-    Long nomS;
-    Long prenomS;
+    String nomS;
+    String prenomS;
     String dateNaissance;
     String ville;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Abonnement abonnement;
     @OneToMany(mappedBy = "skieur")
     Set<Inscription> inscriptions;

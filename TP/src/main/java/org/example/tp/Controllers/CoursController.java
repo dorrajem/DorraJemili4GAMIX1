@@ -3,9 +3,12 @@ package org.example.tp.Controllers;
 
 import lombok.AllArgsConstructor;
 import org.example.tp.Entities.Cours;
+import org.example.tp.Enum.Support;
 import org.example.tp.Services.ICoursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 
@@ -36,6 +39,16 @@ public class CoursController
     @GetMapping("/getAllCourss" )
     public java.util.List<Cours> getAllCourss() {
         return CoursService.retrieveAllCourses();
+    }
+    @PutMapping("/deleteCours" )
+    public void deleteCours(@RequestBody Long numCours) {
+        CoursService.removeCours(numCours);
+    }
+    @GetMapping("/moniteurs/{numInstructor}/weeks")
+    public List<Integer> numWeeksCourseOfInstructorBySupport(
+            @PathVariable Long numInstructor,
+            @RequestParam Support support) {
+        return CoursService.numWeeksCourseOfInstructorBySupport(numInstructor, support);
     }
 
 }

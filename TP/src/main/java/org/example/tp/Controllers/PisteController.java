@@ -36,4 +36,8 @@ public class PisteController
         return PisteService.retrieveAllPistes();
     }
 
+    @PutMapping("/deletePiste" )
+    public void deletePiste(@RequestBody Long numPiste) {
+        PisteService.removePiste(numPiste);
+    }
 }

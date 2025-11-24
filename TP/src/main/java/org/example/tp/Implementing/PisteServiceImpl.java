@@ -37,4 +37,7 @@ public class PisteServiceImpl implements IPisteService {
     public List<Piste> retrieveAllPistes() {
         return pisteRepository.findAll();
     }
+
+    @Override
+    public void removePiste(Long numPiste) {pisteRepository.deleteById(numPiste);}
 }
